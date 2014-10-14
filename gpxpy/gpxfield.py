@@ -73,6 +73,15 @@ class TimeConverter:
                 return mod_datetime.datetime.strptime(string, date_format)
             except ValueError as e:
                 pass
+
+        # everything else failed, try dateutil
+
+        try:
+            from dateutil import parser as du_parser
+            return du_parser.parse(string)
+        except:
+            pass
+
         return None
     def to_string(self, time):
         from . import gpx as mod_gpx
